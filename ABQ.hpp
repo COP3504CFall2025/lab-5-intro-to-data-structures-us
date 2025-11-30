@@ -115,16 +115,6 @@ public:
       curr_size_--;
       T val = *(array_ + front_);
       front_ = (front_ + 1);
-      return val;
-    } else {
-      throw std::runtime_error("empty queue");
-    }
-
-    if (curr_size_ > 0) {
-      curr_size_--;
-      T val = *(array_ + front_);
-      front_ = (front_ + 1);
-      return val;
       if (curr_size_ * 2 <= capacity_) {
         capacity_ /= scale_factor_;
         if (capacity_ == 0)
@@ -136,7 +126,7 @@ public:
         array_ = new_arr;
         new_arr = nullptr;
       }
-      return *(array_ + curr_size_);
+      return val;
     } else {
       throw std::runtime_error("empty queue");
     }
