@@ -12,7 +12,6 @@ private:
 public:
   // Constructor
   LLQ() = default;
-  ~LLQ() = default;
 
   // Insertion
   void enqueue(const T &item) override { list.addTail(item); }

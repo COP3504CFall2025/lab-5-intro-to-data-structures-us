@@ -14,7 +14,6 @@ private:
 public:
   // Constructor
   LLDQ() = default;
-  ~LLDQ() = default;
 
   // Core Insertion Operations
   void pushFront(const T &item) override { list.addHead(item); }

@@ -119,6 +119,27 @@ public:
     } else {
       throw std::runtime_error("empty queue");
     }
+
+    if (curr_size_ > 0) {
+      curr_size_--;
+      T val = *(array_ + front_);
+      front_ = (front_ + 1);
+      return val;
+      if (curr_size_ * 2 <= capacity_) {
+        capacity_ /= scale_factor_;
+        if (capacity_ == 0)
+          capacity_ = 1;
+        T *new_arr = new T[capacity_];
+        for (int i = 0; i < curr_size_; i++)
+          *(new_arr + i) = *(array_ + i);
+        delete[] array_;
+        array_ = new_arr;
+        new_arr = nullptr;
+      }
+      return *(array_ + curr_size_);
+    } else {
+      throw std::runtime_error("empty queue");
+    }
   }
 
   void PrintForward() {

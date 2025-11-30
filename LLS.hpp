@@ -12,7 +12,6 @@ private:
 public:
   // Constructor
   LLS() = default;
-  ~LLS() override = default;
 
   // Insertion
   void push(const T &item) override { list.addHead(item); }
