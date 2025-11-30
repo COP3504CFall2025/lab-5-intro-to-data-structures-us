@@ -61,35 +61,45 @@ public:
 
   // Removal
   bool removeHead() {
-    if (count <= 1) {
+    if (!head)
       return false;
+
+    if (head == tail) {
+      delete head;
+      count = 0;
+      head = nullptr;
+      tail = nullptr;
+      return true;
     }
+
+    Node *old_head = head;
     head = head->next;
-    delete head->prev;
     head->prev = nullptr;
+    delete old_head;
     count--;
     return true;
   }
   bool removeTail() {
-    if (count <= 1) {
+    if (!tail)
       return false;
+    if (head == tail) {
+      delete tail;
+      count = 0;
+      head = nullptr;
+      tail = nullptr;
+      return true;
     }
+
+    Node *old_tail = tail;
     tail = tail->prev;
-    delete tail->next;
     tail->next = nullptr;
+    delete old_tail;
     count--;
     return true;
   }
   void clear() {
-    while (count > 1) {
+    while (head != nullptr)
       removeHead();
-    }
-    if (head)
-      count--;
-    assert(head == tail);
-    delete head;
-    head = nullptr;
-    tail = nullptr;
     assert(count == 0);
   }
 

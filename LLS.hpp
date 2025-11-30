@@ -34,7 +34,7 @@ public:
   // Access
   T peek() const override {
     if (list.getCount() > 0)
-      return list.getTail()->data;
+      return list.getHead()->data;
     else
       throw std::runtime_error("empty stack");
   }

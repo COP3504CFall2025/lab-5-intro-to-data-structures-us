@@ -59,6 +59,7 @@ public:
     rhs.curr_size_ = 0;
     rhs.capacity_ = 0;
     rhs.array_ = nullptr;
+    return *this;
   }
   ~ABS() noexcept override {
     delete[] array_;
@@ -95,7 +96,7 @@ public:
     if (curr_size_ > 0)
       return *(array_ + curr_size_ - 1);
     else
-      throw "empty array";
+      throw std::runtime_error("empty stack");
   }
 
   T pop() override {
@@ -103,7 +104,7 @@ public:
       curr_size_--;
       return *(array_ + curr_size_);
     } else {
-      throw "empty array";
+      throw std::runtime_error("empty stack");
     }
   }
 

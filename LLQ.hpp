@@ -27,7 +27,7 @@ public:
         list.removeHead();
       return val;
     } else {
-      throw "empty linked list";
+      throw std::runtime_error("empty queue");
     }
   }
 
@@ -36,7 +36,7 @@ public:
     if (list.getCount() > 0)
       return list.getHead()->data;
     else
-      throw "empty linked list";
+      throw std::runtime_error("empty queue");
   }
 
   // Getter
