@@ -19,7 +19,7 @@ public:
 
   // Deletion
   T dequeue() override {
-    if (list.getCount > 0) {
+    if (list.getCount() > 0) {
       T val = list.getHead()->data;
       if (list.getCount() == 1)
         list.clear();
@@ -34,7 +34,7 @@ public:
   // Access
   T peek() const override {
     if (list.getCount() > 0)
-      list.getHead()->data;
+      return list.getHead()->data;
     else
       throw "empty linked list";
   }

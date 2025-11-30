@@ -96,7 +96,7 @@ public:
   // Operators
   LinkedList<T> &operator=(LinkedList<T> &&other) noexcept {
     if (this == &other) {
-      return this;
+      return *this;
     }
     clear();
     head = other.head;
@@ -131,6 +131,9 @@ public:
   }
 
   LinkedList(const LinkedList<T> &list) {
+    head = nullptr;
+    tail = nullptr;
+    count = 0;
     Node *current = list.head;
     while (current != nullptr) {
       addTail(current->data);

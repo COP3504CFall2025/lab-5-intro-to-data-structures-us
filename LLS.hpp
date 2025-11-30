@@ -27,7 +27,7 @@ public:
         list.removeHead();
       return val;
     } else {
-      throw "empty array";
+      throw std::runtime_error("empty stack");
     }
   }
 
@@ -36,7 +36,7 @@ public:
     if (list.getCount() > 0)
       return list.getTail()->data;
     else
-      throw "empty array";
+      throw std::runtime_error("empty stack");
   }
 
   // Getters

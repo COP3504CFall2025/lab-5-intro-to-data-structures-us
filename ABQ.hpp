@@ -106,7 +106,7 @@ public:
     if (curr_size_ > 0)
       return *(array_ + front_);
     else
-      throw "empty array";
+      throw std::runtime_error("empty queue");
   }
 
   // Deletion
@@ -117,7 +117,7 @@ public:
       front_ = (front_ + 1);
       return val;
     } else {
-      throw "empty array";
+      throw std::runtime_error("empty queue");
     }
   }
 

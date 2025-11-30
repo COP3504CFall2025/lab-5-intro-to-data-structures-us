@@ -31,7 +31,7 @@ public:
       }
       return val;
     } else {
-      throw "empty linked list";
+      throw std::runtime_error("empty deque");
     }
   }
   T popBack() override {
@@ -44,7 +44,7 @@ public:
       }
       return val;
     } else {
-      throw "empty linked list";
+      throw std::runtime_error("empty deque");
     }
   }
 
@@ -53,13 +53,13 @@ public:
     if (list.getCount() > 0)
       return list.getHead()->data;
     else
-      throw "empty linked list";
+      throw std::runtime_error("empty deque");
   }
   const T &back() const override {
     if (list.getCount() > 0)
       return list.getTail()->data;
     else
-      throw "empty linked list";
+      throw std::runtime_error("empty deque");
   }
 
   // Getter
