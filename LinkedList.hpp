@@ -80,7 +80,7 @@ public:
     count--;
     return true;
   }
-  void Clear() {
+  void clear() {
     while (count > 1) {
       removeHead();
     }
@@ -98,7 +98,7 @@ public:
     if (this == &other) {
       return this;
     }
-    Clear();
+    clear();
     head = other.head;
     tail = other.tail;
     count = other.count;
@@ -114,7 +114,7 @@ public:
     if (this == &rhs) {
       return *this;
     }
-    Clear();
+    clear();
     Node *current = rhs.head;
     while (current != nullptr) {
       addTail(current->data);
@@ -146,7 +146,7 @@ public:
     other.tail = nullptr;
     other.count = 0;
   }
-  ~LinkedList() { Clear(); }
+  ~LinkedList() { clear(); }
 
 private:
   // Stores pointers to first and last nodes and count

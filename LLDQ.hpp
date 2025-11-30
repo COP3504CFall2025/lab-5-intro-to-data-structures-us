@@ -25,7 +25,7 @@ public:
     if (list.getCount() > 0) {
       T val = list.getHead()->data;
       if (list.getCount() == 1) {
-        list.Clear();
+        list.clear();
       } else {
         list.removeHead();
       }
@@ -38,7 +38,7 @@ public:
     if (list.getCount() > 0) {
       T val = list.getTail()->data;
       if (list.getCount() == 1) {
-        list.Clear();
+        list.clear();
       } else {
         list.removeTail();
       }
