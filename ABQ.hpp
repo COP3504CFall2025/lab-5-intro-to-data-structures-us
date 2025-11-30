@@ -120,8 +120,8 @@ public:
 
     if (curr_size_ * 4 <= capacity_) {
       capacity_ /= scale_factor_;
-      if (capacity_ < 2)
-        capacity_ = 2;
+      if (capacity_ < 1)
+        capacity_ = 1;
       T *new_arr = new T[capacity_];
       for (int i = 0; i < curr_size_; ++i)
         *(new_arr + i) = *(array_ + front_ + i);
