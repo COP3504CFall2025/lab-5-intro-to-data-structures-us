@@ -23,7 +23,7 @@ public:
     size_ = 0;
     capacity_ = 4;
     front_ = 0;
-    back_ = size_;
+    back_ = 0;
   }
   explicit ABDQ(const size_t capacity) {
     data_ = new T[capacity];
@@ -111,8 +111,8 @@ public:
   void pushBack(const T &item) override {
     if (size_ == capacity_)
       ensureCapacity();
-    back_ = (front_ + size_) % capacity_;
     *(data_ + back_) = item;
+    back_ = (back_ + 1) % capacity_;
     size_++;
   }
 
