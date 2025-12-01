@@ -129,7 +129,7 @@ public:
   T popBack() override {
     if (size_ == 0)
       throw std::runtime_error("empty deque");
-    T val = *(data_ + back_);
+    T val = *(data_ + back_ - 1);
     back_ = (back_ - 1 + capacity_) % capacity_;
     size_--;
     shrinkIfNeeded();
