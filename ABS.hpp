@@ -102,6 +102,7 @@ public:
   T pop() override {
     if (curr_size_ > 0) {
       curr_size_--;
+      T val = *(array_ + curr_size_);
       if (curr_size_ * 4 <= capacity_) {
         capacity_ /= scale_factor_;
         if (capacity_ < 1)
@@ -113,7 +114,7 @@ public:
         array_ = new_arr;
         new_arr = nullptr;
       }
-      return *(array_ + curr_size_);
+      return val;
     } else {
       throw std::runtime_error("empty stack");
     }

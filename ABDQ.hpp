@@ -35,22 +35,28 @@ public:
   ABDQ(const ABDQ &other) {
     size_ = other.size_;
     capacity_ = other.capacity_;
-    front_ = other.front_;
-    back_ = size_;
     data_ = new T[capacity_];
-    for (int i = 0; i < other.size_; i++)
-      *(data_ + i) = *(other.data_ + i);
+    back_ = size_;
+    int index = other.front_;
+    for (int i = 0; i < other.size_; i++) {
+      *(data_ + i) = *(other.data_ + index);
+      index = (index + 1) % other.capacity_;
+    }
+    front_ = 0;
   }
   ABDQ &operator=(const ABDQ &rhs) {
     if (this == &rhs)
       return *this;
     size_ = rhs.size_;
     capacity_ = rhs.capacity_;
-    front_ = rhs.front_;
     back_ = size_;
     T *new_arr = new T[capacity_];
-    for (int i = 0; i < rhs.size_; i++)
-      *(new_arr + i) = *(rhs.data_ + i);
+    int index = rhs.front_;
+    for (int i = 0; i < rhs.size_; i++) {
+      *(new_arr + i) = *(rhs.data_ + index);
+      index = (index + 1) % rhs.capacity_;
+    }
+    front_ = 0;
     delete[] data_;
     data_ = new_arr;
     new_arr = nullptr;
@@ -60,10 +66,12 @@ public:
     size_ = other.size_;
     capacity_ = other.capacity_;
     front_ = other.front_;
-    back_ = size_;
+    back_ = other.back_;
     data_ = other.data_;
     other.size_ = 0;
     other.capacity_ = 0;
+    other.front_ = 0;
+    other.back_ = 0;
     other.data_ = nullptr;
   }
   ABDQ &operator=(ABDQ &&rhs) noexcept {
@@ -72,11 +80,13 @@ public:
     size_ = rhs.size_;
     capacity_ = rhs.capacity_;
     front_ = rhs.front_;
-    back_ = size_;
+    back_ = rhs.size_;
     delete[] data_;
     data_ = rhs.data_;
     rhs.size_ = 0;
     rhs.capacity_ = 0;
+    rhs.front_ = 0;
+    rhs.back_ = 0;
     rhs.data_ = nullptr;
     return *this;
   }
@@ -109,17 +119,19 @@ public:
   // Deletion
   T popFront() override {
     if (size_ == 0)
-      throw "empty deque";
+      throw std::runtime_error("empty deque");
     T val = *(data_ + front_);
     front_ = (front_ + 1 + capacity_) % capacity_;
+    size_--;
     shrinkIfNeeded();
     return val;
   }
   T popBack() override {
     if (size_ == 0)
-      throw "empty deque";
+      throw std::runtime_error("empty deque");
     T val = *(data_ + back_);
-    back_ = (back_ - 1 + size_) % capacity_;
+    back_ = (back_ - 1 + capacity_) % capacity_;
+    size_--;
     shrinkIfNeeded();
     return val;
   }
@@ -127,13 +139,13 @@ public:
   // Access
   const T &front() const override {
     if (size_ == 0)
-      throw "empty deque";
+      throw std::runtime_error("empty deque");
     return *(data_ + front_);
   }
   const T &back() const override {
     if (size_ == 0)
-      throw "empty deque";
-    return *(data_ + back_);
+      throw std::runtime_error("empty deque");
+    return *(data_ + (back_ - 1 + capacity_) % capacity_);
   }
 
   // Getters
